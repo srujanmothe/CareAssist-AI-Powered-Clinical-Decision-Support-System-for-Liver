@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Care Assist - Liver Health Detection</title>
+  
+  <!-- Google Fonts link -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #fcfeff;
+      flex-direction: column;
+    }
+    .heading {
+      text-align: center;
+      color: #227faa;
+      font-size: 50px;
+      font-weight: bold;
+      margin-bottom: 40px;
+      font-family: 'Playfair Display', serif; /* Applying the custom font */
+     /* text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5); /* Shadow effect */
+    }
+    .container {
+      display: flex;
+      width: 90%;
+      max-width: 1200px;
+      height: 80%;
+      background: rgb(196, 206, 209);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    .upload-section {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background: #c5cadd;
+      padding: 20px;
+    }
+    .upload-section form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+    }
+    .upload-section input[type="file"],
+    .upload-section button {
+      padding: 10px 20px;
+      margin-bottom: 0px;
+      width: 80%;
+      max-width: 300px;
+    }
+    .upload-section button {
+      background: #3498db;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 19px;
+    }
+    .upload-section button:hover {
+      background: #2980b9;
+    }
+    .upload-section .preview {
+      margin-top: 20px;
+      text-align: center;
+    }
+    .upload-section .preview img {
+      max-width: 100%;
+      max-height: 200px;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+    }
+    .result-section {
+      flex: 2;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      background: #ffffff;
+    }
+    .result-section h2 {
+      color: #2c3e50;
+      margin-bottom: 20px;
+    }
+    .result-section .result {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 10px;
+      color: #34495e;
+    }
+    .result-section .detected-stage {
+      font-size: 28px;
+      font-weight: bold;
+      color: black;
+    }
+    .result-section .description {
+      background: #f9f9f9;
+      padding: 15px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+    .description h4 {
+      margin: 10px 0;
+      color: #243444;
+    }
+    .description ul {
+      margin: 5px 0;
+      color: #4d5858;
+    }
+    .description li {
+      margin-bottom: 5px;
+    }
+    .detected-stage.f0,
+    .detected-stage.f1,
+    .detected-stage.f2,
+    .detected-stage.f3,
+    .detected-stage.f4 {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <!-- Title Section -->
+  <div class="heading">CareAssist: AI-Powered Clinical Decision Support System.</div>
+
+  <div class="container">
+    <!-- Upload Section -->
+    <div class="upload-section">
+      <h2>Upload Image</h2>
+      <form id="uploadForm" enctype="multipart/form-data">
+        <input type="file" name="image" id="imageInput" accept="image/*" required>
+        <button type="submit">Detect Stage</button>
+      </form>
+      <div class="preview" id="imagePreview">
+        <!-- Image will be displayed here -->
+      </div>
+    </div>
+
+    <!-- Result Section -->
+    <div class="result-section">
+      <h2>Detection Results</h2>
+      <div id="result" class="result">Upload an image to see results.</div>
+      <div id="detectedStage" class="detected-stage"></div>
+      <div id="description" class="description" style="display: none;">
+        <h4>Major Causes:</h4>
+        <ul id="causes"></ul>
+        <h4>About the Stage:</h4>
+        <p id="about"></p>
+        <h4>Accuracy:</h4>
+        <p id="accuracy"></p>
+        <h4>Preventive Measures:</h4>
+        <ul id="measures"></ul>
+        <h4>Reversibility Chances:</h4>
+        <p id="chances"></p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const form = document.getElementById("uploadForm");
+    const imageInput = document.getElementById("imageInput");
+    const imagePreview = document.getElementById("imagePreview");
+    const resultDiv = document.getElementById("result");
+    const detectedStageDiv = document.getElementById("detectedStage");
+    const descriptionDiv = document.getElementById("description");
+    const causesList = document.getElementById("causes");
+    const aboutP = document.getElementById("about");
+    const accuracyP = document.getElementById("accuracy");
+    const measuresList = document.getElementById("measures");
+    const chancesP = document.getElementById("chances");
+
+    // Show preview of the uploaded image
+    imageInput.addEventListener("change", (e) => {
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = () => {
+          imagePreview.innerHTML = `<img src="${reader.result}" alt="Uploaded Image">`;
+        };
+        reader.readAsDataURL(file);
+      } else {
+        imagePreview.innerHTML = ""; // Clear the preview if no file is selected
+      }
+    });
+
+    // Stage mapping
+    const stageMapping = {
+      F0: "F0 - Healthy Liver",
+      F1: "F1 - Mild Fibrosis",
+      F2: "F2 - Moderate Fibrosis",
+      F3: "F3 - Severe Fibrosis",
+      F4: "F4 - Cirrhosis"
+    };
+
+    // Handle form submission
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const formData = new FormData(form);
+      resultDiv.textContent = "Processing...";
+      detectedStageDiv.textContent = "";
+      descriptionDiv.style.display = "none";
+
+      try {
+        const response = await fetch("/predict", {
+          method: "POST",
+          body: formData,
+        });
+
+        if (!response.ok) {
+          throw new Error("Failed to fetch results. Please try again.");
+        }
+
+        const data = await response.json();
+        if (data.error) {
+          resultDiv.textContent = `Error: ${data.error}`;
+          return;
+        }
+
+        // Display detected stage with mapping
+        const detectedStage = stageMapping[data.stage] || "Unknown Stage";
+        detectedStageDiv.textContent = `Detected Stage: ${detectedStage}`;
+        detectedStageDiv.className = "detected-stage"; // Keeps it black
+
+        // Display detailed description
+        resultDiv.textContent = "";
+        causesList.innerHTML = data.description["Major Causes"].map(cause => `<li>${cause}</li>`).join("");
+        aboutP.textContent = data.description["About the Stage"];
+        accuracyP.textContent = data.description["Accuracy"];
+        measuresList.innerHTML = data.description["Preventive Measures"].map(measure => `<li>${measure}</li>`).join("");
+        chancesP.textContent = data.description["Reversibility Chances"];
+        descriptionDiv.style.display = "block";
+      } catch (error) {
+        resultDiv.textContent = `Error: ${error.message}`;
+      }
+    });
+  </script>
+</body>
+</html>

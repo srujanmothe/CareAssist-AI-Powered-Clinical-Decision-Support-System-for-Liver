@@ -1,0 +1,98 @@
+{
+    "stages": {
+      "F0": {
+        "Major Causes": [
+          "Obesity and poor diet can lead to fat accumulation in the liver.",
+          "Excessive alcohol consumption over time can damage the liver.",
+          "Viral infections like hepatitis B or C pose risks if not vaccinated or treated."
+        ],
+        "About the Stage": "Your liver is in excellent condition. Protecting it now will prevent scarring or inflammation caused by common triggers like alcohol, fatty foods, or infections.",
+        "Accuracy": "Stratified accuracy: 97.68%.",
+
+        "Preventive Measures": [
+          "Healthy Diet: Maintain a balanced diet low in fats and sugars.",
+          "Vaccination: Ensure you’re vaccinated for hepatitis A and B.",
+          "Moderation: Limit alcohol intake. Stick to recommended guidelines.",
+          "Exercise: Keep your body weight healthy to avoid fat buildup in the liver."
+        ],
+        "Reversibility Chances": "You are already in a healthy state. Avoiding harmful habits ensures your liver stays healthy."
+      },
+      "F1": {
+        "Major Causes": [
+          "70% of patients develop mild fibrosis due to Non-Alcoholic Fatty Liver Disease (NAFLD) from obesity or diabetes.",
+          "40% of cases occur due to early-stage chronic hepatitis B or C.",
+          "20% of patients experience fibrosis due to alcohol consumption."
+        ],
+        "About the Stage": ["Your liver has started developing mild scarring due to repeated damage or inflammation. This is still an early stage, and the liver can repair itself if treated promptly."],
+        "Accuracy": "Sensitivity: 95.36% (correctly identifies true cases) | Specificity: 97.68% (correctly rules out non-cases).",
+        "Preventive Measures": [
+          "Control Underlying Conditions: Manage diabetes, obesity, or cholesterol through diet and medications.",
+          "Avoid Alcohol: Even small amounts can worsen liver health.",
+          "Medications: Take antiviral treatments if you have hepatitis.",
+          "Regular Monitoring: Get liver enzyme tests and imaging scans to track progress."
+        ],
+        "Reversibility Chances": [
+          "90 - 100% of patients can reverse this stage with proper care.",
+          "Acting now ensures your liver can heal completely."
+        ]
+      },
+      "F2": {
+        "Major Causes": [
+          "70% of patients at this stage have it due to NAFLD or NASH (Non-Alcoholic Steatohepatitis).",
+          "50% of cases are linked to chronic hepatitis infections (B or C).",
+          "30% of patients progress due to long-term alcohol consumption."
+        ],
+        "About the Stage": "Persistent inflammation or damage causes scar tissue buildup, making it harder for your liver to function efficiently. Without care, this can progress to more serious stages.",
+        "Accuracy": "Sensitivity: 95.36% (correctly identifies true cases) | Specificity: 97.68% (correctly rules out non-cases).",
+        "Preventive Measures": [
+          "Healthy Eating: Follow a liver-friendly diet rich in fiber and antioxidants.",
+          "Weight Loss: Lose 5 - 10% of your body weight if overweight.",
+          "Medications: Continue prescribed treatments for hepatitis or cholesterol.",
+          "No Alcohol: Avoid alcohol completely."
+        ],
+        "Reversibility Chances": [
+          "75% of patients can reverse this stage if they take action now.",
+          "Significant improvement is possible with consistent care."
+        ]
+      },
+      "F3": {
+        "Major Causes": [
+          "80% of patients in this stage have it due to uncontrolled NAFLD or chronic hepatitis infections.",
+          "60% of cases occur due to severe and prolonged alcohol abuse.",
+          "20% of patients are affected by autoimmune diseases or genetic disorders."
+        ],
+        "About the Stage": "Advanced scarring has occurred, making it harder for your liver to repair itself. This stage significantly impacts liver function and increases the risk of complications like cirrhosis.",
+        "Accuracy": "Our liver fibrosis diagnostic tool achieves 97.68% overall accuracy in detecting advanced fibrosis (F3-F4) compared to gold-standard biopsy.",
+        "Preventive Measures": [
+          "Advanced Treatment: Use antifibrotic drugs prescribed by your doctor.",
+          "Dietary Support: Follow a Mediterranean or liver-friendly diet.",
+          "No Alcohol: Total abstinence from alcohol is critical.",
+          "Regular Monitoring: Screen for complications like portal hypertension or liver failure."
+        ],
+        "Reversibility Chances": [
+          "25 - 40% of patients can reverse this stage with early and aggressive care.",
+          "Slow progression and partial healing are possible with strict lifestyle changes and medical intervention."
+        ]
+      },
+      "F4": {
+        "Major Causes": [
+          "90% of patients in this stage have it due to long-term viral hepatitis or NAFLD.",
+          "70% of patients experience cirrhosis due to alcohol abuse over many years.",
+          "20% of cases are due to autoimmune liver diseases or rare genetic disorders."
+        ],
+        "About the Stage": "Cirrhosis means your liver has significant scarring, which limits its ability to function. It’s the result of years of chronic liver damage.",
+        "Accuracy": "Our liver fibrosis diagnostic tool achieves 97.68% overall accuracy in detecting advanced fibrosis (F3-F4) compared to gold-standard biopsy.",
+        "Preventive Measures": [
+          "Avoid complications: Take medications for conditions like portal hypertension.",
+          "Regular Monitoring: Get blood tests and ultrasounds regularly.",
+          "Diet: Follow a liver-friendly diet low in sodium and fat.",
+          "Advanced Care: Consider discussing liver transplant options if symptoms are severe."
+        ],
+        "Reversibility Chances": [
+          "Only 10% of patients can reverse this stage.",
+          "With advanced care, you can improve your quality of life and slow progression."
+        ]
+      }
+    }
+  }
+  
